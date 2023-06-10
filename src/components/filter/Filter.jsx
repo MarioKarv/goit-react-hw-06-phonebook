@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { filterContacts } from 'redux/filter/filter-slice';
 import css from './Filter.module.css'
 
-const Filter = ({ onFilter }) => {
+const Filter = () => {
+    const dispatch = useDispatch();
+    const handleChange = value => dispatch(filterContacts(value));
     return (
       <input
         className={css.input}
@@ -10,7 +14,7 @@ const Filter = ({ onFilter }) => {
         name="name"
         placeholder="Enter name for search"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        onChange={e => onFilter(e.target.value)}
+        onChange={e => handleChange(e.target.value)}
       />
     );
 }
